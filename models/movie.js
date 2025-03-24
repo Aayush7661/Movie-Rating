@@ -5,10 +5,10 @@ module.exports = (sequelize, DataTypes) => {
       title: DataTypes.STRING,
       description: DataTypes.TEXT,
       releaseYear: DataTypes.INTEGER,
-      imageUrl: DataTypes.STRING, // Store only the image's last name (e.g., "image.jpg")
+      imageUrl: DataTypes.STRING,
     },
     {
-      timestamps: true, // Enable automatic timestamps
+      timestamps: true,
     }
   );
 

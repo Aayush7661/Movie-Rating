@@ -10,11 +10,8 @@ const { signupSchema, loginSchema } = require("../validations/userValidation");
 
 const router = express.Router();
 
-// Public routes
 router.post("/signup", validateRequest(signupSchema), signup);
 router.post("/login", validateRequest(loginSchema), login);
-
-// Protected routes (require authentication)
 router.get("/profile", authMiddleware, getUserProfile);
 
 module.exports = router;

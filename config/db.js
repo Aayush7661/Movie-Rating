@@ -11,12 +11,10 @@ const createConnection = async () => {
   });
 };
 
-// Function to create the database if it doesn't exist
 const createDatabase = async () => {
-  const connection = await createConnection(); // Create a connection
+  const connection = await createConnection();
 
   try {
-    // Create the database if it doesn't exist
     await connection.query(
       `CREATE DATABASE IF NOT EXISTS ${process.env.MYSQL_DATABASE}`
     );
@@ -27,36 +25,29 @@ const createDatabase = async () => {
   }
 };
 
-// Initialize Sequelize with the configuration
 const sequelize = new Sequelize(
-  process.env.MYSQL_DATABASE, // Database name
-  process.env.MYSQL_USER, // Database username
-  process.env.MYSQL_PASSWORD || "", // Database password (fallback to empty string if not provided)
+  process.env.MYSQL_DATABASE,
+  process.env.MYSQL_USER,
+  process.env.MYSQL_PASSWORD || "",
   {
-    host: process.env.MYSQL_HOST, // Database host
-    port: process.env.MYSQL_PORT || 3306, // Database port (default: 3306)
-    dialect: "mysql", // Database dialect
+    host: process.env.MYSQL_HOST,
+    port: process.env.MYSQL_PORT || 3306,
+    dialect: "mysql",
   }
 );
-
-// Function to create an admin user if it doesn't exist
 const createAdminUser = async () => {
   try {
-    const { User } = require("../models"); // Import the User model
+    const { User } = require("../models");
 
     const adminUsername = process.env.ADMIN_USERNAME || "admin";
     const adminPassword = process.env.ADMIN_PASSWORD || "admin123";
 
-    // Check if the admin user already exists
     const adminUser = await User.findOne({
       where: { username: adminUsername },
     });
 
     if (!adminUser) {
-      // Hash the admin password
       const hashedPassword = await bcrypt.hash(adminPassword, 10);
-
-      // Create the admin user
       await User.create({
         username: adminUsername,
         password: hashedPassword,

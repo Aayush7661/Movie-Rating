@@ -21,7 +21,7 @@ router.post(
   "/movies",
   authMiddleware,
   isAdmin,
-  upload.single("image"), // Use Multer to handle file uploads
+  upload.single("image"),
   validateRequest(addMovieSchema),
   addMovie
 );

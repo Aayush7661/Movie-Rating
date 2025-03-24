@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     likes: { type: DataTypes.INTEGER, defaultValue: 0 },
   },
   {
-    timestamps: true, // Enable automatic timestamps
+    timestamps: true,
   });
 
   return Review;

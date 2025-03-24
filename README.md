@@ -4,6 +4,8 @@ This document provides step-by-step details about the APIs and middleware used i
 
 APIs List
 
+Server start using server.js file
+
 1. Authentication APIs
 1.1 Signup:
   - Method: POST

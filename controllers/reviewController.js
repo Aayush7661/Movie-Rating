@@ -3,7 +3,7 @@ const { Review, User, Movie } = require("../models");
 const addReview = async (req, res) => {
   try {
     const { movieId, rating, comment } = req.body;
-    const userId = req.userId; // From authMiddleware
+    const userId = req.userId;
     const review = await Review.create({
       rating,
       comment,
@@ -64,7 +64,7 @@ const likeReview = async (req, res) => {
     if (!review) {
       return res.status(404).json({ message: "Review not found" });
     }
-    review.likes = (review.likes || 0) + 1; // Increment likes
+    review.likes = (review.likes || 0) + 1;
     await review.save();
     return res.json({ statusode: 200, status: true, review });
   } catch (err) {
@@ -77,7 +77,7 @@ const likeReview = async (req, res) => {
 const getSortedReviews = async (req, res) => {
   try {
     const { movieId } = req.params;
-    const { sortBy } = req.query; // 'popular' or 'recent'
+    const { sortBy } = req.query;
     let order = [];
     if (sortBy === "popular") {
       order = [["likes", "DESC"]];
@@ -87,7 +87,7 @@ const getSortedReviews = async (req, res) => {
     const reviews = await Review.findAll({
       where: { MovieId: movieId },
       order,
-      include: ["User"], // Include user details
+      include: ["User"],
     });
     return res.json({ statusode: 200, status: true, reviews });
   } catch (err) {

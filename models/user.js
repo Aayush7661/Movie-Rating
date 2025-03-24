@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     },
 
     {
-      timestamps: true, // Enable automatic timestamps
+      timestamps: true,
     }
   );
 

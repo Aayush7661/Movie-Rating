@@ -1,6 +1,5 @@
 const Joi = require("joi");
 
-// Validation schema for user signup
 const signupSchema = Joi.object({
   username: Joi.string().required(),
   password: Joi.string().min(6).required(),
@@ -12,7 +11,7 @@ const signupSchema = Joi.object({
   age: Joi.number().integer().min(1).max(120).required(),
 });
 
-// Validation schema for user login
+
 const loginSchema = Joi.object({
   email: Joi.string().email().required(),
   password: Joi.string().required(),

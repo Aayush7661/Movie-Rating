@@ -3,14 +3,11 @@ const { Movie } = require("../models");
 const addMovie = async (req, res) => {
   try {
     const { title, description, releaseYear } = req.body;
-    const imageFile = req.file; // Multer will handle the file upload
+    const imageFile = req.file;
     if (!imageFile) {
       return res.status(400).json({ message: "Image file is required" });
     }
-
-    // Save only the image's last name (e.g., "image.jpg")
     const imageUrl = imageFile.filename;
-    // Create the movie
     const movie = await Movie.create({
       title,
       description,
@@ -18,9 +15,9 @@ const addMovie = async (req, res) => {
       imageUrl,
     });
 
-    res.status(201).json({ message: "Movie added successfully", movie });
+    return res.status(201).json({ message: "Movie added successfully", movie });
   } catch (err) {
-    res.status(500).json({ message: "Error adding movie", error: err.message });
+    return res.status(500).json({ message: "Error adding movie", error: err.message });
   }
 };
 

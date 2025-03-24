@@ -30,7 +30,6 @@ const getMovieDetails = async (req, res) => {
 
     return res.json({ statusCode: 200, status: true, movie });
   } catch (err) {
-    console.log(err)
     return res
       .status(500)
       .json({ message: "Error fetching movie details", error: err.message });
